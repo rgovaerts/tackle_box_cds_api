@@ -1,0 +1,8 @@
+{
+    "extensions": ["jakebecker.elixir-ls"],
+    "forwardPorts": [4000],
+    "dockerComposeFile": ["../docker-compose.yml", "../docker-compose.dev.yml"],
+    "workspaceFolder": "/app",
+    "service": "web",
+    "remoteUser": "root"
+}
