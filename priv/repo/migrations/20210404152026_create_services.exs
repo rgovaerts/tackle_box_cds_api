@@ -8,6 +8,7 @@ defmodule TackleBoxCds.Repo.Migrations.CreateServices do
       add :title, :string
       add :description, :string, null: false
       add :prefetch, :map
+      add :url, :string
 
       timestamps()
     end

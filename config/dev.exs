@@ -55,3 +55,5 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :tackle_box_cds, :service_invoker, TackleBoxCds.CDSHooks.ServiceInvokerHttp

@@ -8,7 +8,8 @@ defmodule TackleBoxCdsWeb.ServiceControllerTest do
     description: "some description",
     hook: "some-hook",
     prefetch: %{},
-    title: "some title"
+    title: "some title",
+    url: "http://example.com"
   }
   @update_attrs %{
     description: "some updated description",
@@ -84,6 +85,24 @@ defmodule TackleBoxCdsWeb.ServiceControllerTest do
       end
     end
   end
+
+  describe "invoke service" do
+    setup [:create_service]
+
+    test "invokes the service", %{conn: conn, service: service} do
+      conn = %{conn | body_params: %{hello: "world"}}
+      conn = post(conn, Routes.service_path(conn, :invoke, service.id))
+      assert response(conn, 200)
+    end
+
+  end
+
+  test "invoke service when service does not exists returns 404", %{conn: conn} do
+    assert_error_sent(404, fn ->
+      post(conn, Routes.service_path(conn, :invoke, "3f3fd9a2-3f69-463e-3f3f-153f34003f3f"))
+    end)
+  end
+
 
   defp create_service(_) do
     service = fixture(:service)

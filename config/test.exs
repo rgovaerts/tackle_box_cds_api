@@ -20,3 +20,5 @@ config :tackle_box_cds, TackleBoxCdsWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :tackle_box_cds, :service_invoker, TackleBoxCds.CDSHooks.ServiceInvokerMock

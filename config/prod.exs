@@ -53,3 +53,5 @@ config :logger, level: :info
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
 import_config "prod.secret.exs"
+
+config :tackle_box_cds, :service_invoker, TackleBoxCds.CDSHooks.ServiceInvokerHttp

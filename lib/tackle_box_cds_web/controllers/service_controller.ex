@@ -1,4 +1,5 @@
 defmodule TackleBoxCdsWeb.ServiceController do
+  @service_invoker Application.get_env(:tackle_box_cds, :service_invoker)
   use TackleBoxCdsWeb, :controller
 
   alias TackleBoxCds.CDSHooks
@@ -38,6 +39,19 @@ defmodule TackleBoxCdsWeb.ServiceController do
 
     with {:ok, %Service{}} <- CDSHooks.delete_service(service) do
       send_resp(conn, :no_content, "")
+    end
+  end
+
+  def invoke(conn, %{"id" => id}) do
+    service = CDSHooks.get_service!(id)
+    with {:ok, encoded_body} <- Jason.encode(conn.body_params),
+    {:ok, %{
+      body: body,
+      headers: headers,
+      status_code: status
+    }} <- @service_invoker.invoke(service.url, encoded_body, conn.req_headers) do
+      Enum.each(headers, fn {key, value} -> put_resp_header(conn, key, value) end)
+      resp(conn, status, body)
     end
   end
 end

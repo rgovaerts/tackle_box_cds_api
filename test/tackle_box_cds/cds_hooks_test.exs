@@ -6,7 +6,7 @@ defmodule TackleBoxCds.CDSHooksTest do
   describe "services" do
     alias TackleBoxCds.CDSHooks.Service
 
-    @valid_attrs %{hook: "patient-view", description: "description of this service"}
+    @valid_attrs %{hook: "patient-view", description: "description of this service", url: "http://example.com"}
     @update_attrs %{hook: "updated-patient-view", description: "updated description of this service"}
     @invalid_attrs %{hook: nil, description: nil, title: 123}
 

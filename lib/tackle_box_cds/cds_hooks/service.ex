@@ -9,6 +9,7 @@ defmodule TackleBoxCds.CDSHooks.Service do
     field :title, :string
     field :description, :string
     field :prefetch, :map
+    field :url, :string
 
     timestamps()
   end
@@ -16,7 +17,7 @@ defmodule TackleBoxCds.CDSHooks.Service do
   @doc false
   def changeset(service, attrs) do
     service
-    |> cast(attrs, [:hook, :title, :description, :prefetch])
-    |> validate_required([:hook, :description])
+    |> cast(attrs, [:hook, :title, :description, :prefetch, :url])
+    |> validate_required([:hook, :description, :url])
   end
 end

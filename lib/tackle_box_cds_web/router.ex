@@ -8,6 +8,7 @@ defmodule TackleBoxCdsWeb.Router do
   scope "/api", TackleBoxCdsWeb do
     pipe_through :api
     resources "/cds-services", ServiceController, only: [:index, :show, :create, :update, :delete]
+    post "/cds-services/:id", ServiceController, :invoke
   end
 
   # Enables LiveDashboard only for development
